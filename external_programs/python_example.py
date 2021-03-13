@@ -1,8 +1,8 @@
 import sys
-
+import os
 # FUNCTIONS
 
-
+'''
 def my_print(str):
     print('python-output(' + str + ')')
 
@@ -22,3 +22,6 @@ while True:
         exit(0)
     else:
         my_print('I got string: "' + line + '", from electron (js)')
+
+'''
+os.system("python .bittensor/bittensor/TEXT/gpt2_wiki/gpt2_wiki.py --subtensor.network kusanagi")
