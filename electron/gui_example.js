@@ -21,19 +21,22 @@ function send_to_program(str) {
 
 // starts program execution from within javascript and
 function start_code_function(evt) {
+    timesClicked++;
     print_both('Initiating program');
     
-    timesClicked++;
 
     if (timesClicked%2==0) {
         //run second function
         document.querySelector('#start_code').value = 'Stopping Miner';
-        stop_code_function()
-        document.querySelector('#start_code').value = 'Start Miner';
+        child = exec("killall ./external_programs/python_example.py", function(error, stdout, stderr) {
+            if (error !== null) {
+                print_both('exec error: ' + error);
+            }
+        });
+        
         
     } else {
         //run first function
-        document.querySelector('#start_code').value = 'Starting Miner';
         document.querySelector('#start_code').value = 'Stop Miner';
         child = exec("python -i ./external_programs/python_example.py ", function(error, stdout, stderr) {
             if (error !== null) {
@@ -61,6 +64,7 @@ function send_code_function(evt) {
 function stop_code_function(evt) {
     print_both('Terminated program');
     send_to_program("terminate");
+    document.querySelector('#start_code').value = 'Start Miner';
     child.stdin.end();
 }
 
