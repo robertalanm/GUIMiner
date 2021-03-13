@@ -28,11 +28,12 @@ function start_code_function(evt) {
     if (timesClicked%2==0) {
         //run second function
         document.querySelector('#start_code').value = 'Stopping Miner';
-        child = exec("killall ./external_programs/python_example.py", function(error, stdout, stderr) {
+        child = exec("pgrep -f python | xargs kill -9", function(error, stdout, stderr) {
             if (error !== null) {
                 print_both('exec error: ' + error);
             }
         });
+        document.querySelector('#start_code').value = 'Start Miner';
         
         
     } else {
