@@ -5,6 +5,7 @@ const exec = require('child_process').exec;
 var nodeConsole = require('console');
 var my_console = new nodeConsole.Console(process.stdout, process.stderr);
 var child;
+var timesClicked = 0;
 
 function print_both(str) {
     console.log('Javascript: ' + str);
@@ -21,12 +22,27 @@ function send_to_program(str) {
 // starts program execution from within javascript and
 function start_code_function(evt) {
     print_both('Initiating program');
+    
+    timesClicked++;
 
-    child = exec("python -i ./external_programs/python_example.py ", function(error, stdout, stderr) {
-        if (error !== null) {
-            print_both('exec error: ' + error);
-        }
-    });
+    if (timesClicked%2==0) {
+        //run second function
+        document.querySelector('#start_code').value = 'Stopping Miner';
+        stop_code_function()
+        document.querySelector('#start_code').value = 'Start Miner';
+        
+    } else {
+        //run first function
+        document.querySelector('#start_code').value = 'Starting Miner';
+        document.querySelector('#start_code').value = 'Stop Miner';
+        child = exec("python -i ./external_programs/python_example.py ", function(error, stdout, stderr) {
+            if (error !== null) {
+                print_both('exec error: ' + error);
+            }
+        });
+        
+    }
+    
 
     child.stdout.on('data', function(data) {
         print_both('Following data has been piped from python program: ' + data.toString('utf8'));
