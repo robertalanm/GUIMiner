@@ -6,7 +6,7 @@ import argparse
 def main(dataset = "gpt2_wiki/gpt2_wiki.py", network = "kusanagi"):
     print("running os.system command")
     try:
-        os.system("python ~/.bittensor/bittensor/miners/TEXT/{dataset} --subtensor.network {network}|tee -a log.txt")
+        os.system(f"python ~/.bittensor/bittensor/miners/TEXT/{dataset} --subtensor.network {network}|tee -a log.txt")
     except Exception as e:
         print(e)
 
