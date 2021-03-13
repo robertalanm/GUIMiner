@@ -24,4 +24,8 @@ while True:
         my_print('I got string: "' + line + '", from electron (js)')
 
 '''
-os.system("python .bittensor/bittensor/TEXT/gpt2_wiki/gpt2_wiki.py --subtensor.network kusanagi")
+print("running os.system command")
+try:
+    os.system("python ~/.bittensor/bittensor/miners/TEXT/gpt2_wiki/gpt2_wiki.py --subtensor.network kusanagi|tee -a log.txt")
+except Exception as e:
+    print(e)
