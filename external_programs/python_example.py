@@ -1,31 +1,15 @@
 import sys
 import os
+import argparse
 # FUNCTIONS
 
-'''
-def my_print(str):
-    print('python-output(' + str + ')')
+def main(dataset = "gpt2_wiki/gpt2_wiki.py", network = "kusanagi"):
+    print("running os.system command")
+    try:
+        os.system("python ~/.bittensor/bittensor/miners/TEXT/{dataset} --subtensor.network {network}|tee -a log.txt")
+    except Exception as e:
+        print(e)
 
 
-# CODE
-
-my_print('Spawned from within electron (js)')
-
-while True:
-    line = sys.stdin.readline()
-
-    if line == "terminate":
-        my_print('I got a terminate request from electron (js)...terminating')
-        exit(0)
-    elif line == "":
-        my_print('Terminating as there is no data given...terminated')
-        exit(0)
-    else:
-        my_print('I got string: "' + line + '", from electron (js)')
-
-'''
-print("running os.system command")
-try:
-    os.system("python ~/.bittensor/bittensor/miners/TEXT/gpt2_wiki/gpt2_wiki.py --subtensor.network kusanagi|tee -a log.txt")
-except Exception as e:
-    print(e)
+if __name__ == "__main__":
+    main()
